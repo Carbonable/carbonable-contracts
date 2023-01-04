@@ -287,25 +287,28 @@ func tokenInSlotByIndex{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_ch
 //
 
 @view
-func contractURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (
+func contractURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, bitwise_ptr: BitwiseBuiltin*, range_check_ptr}() -> (
     uri_len: felt, uri: felt*
 ) {
+    let (instance) = get_contract_address();
     let (uri_len, uri) = ERC3525MetadataDescriptor.constructContractURI{instance=instance}();
     return (uri_len=uri_len, uri=uri);
 }
 
 @view
-func slotURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(slot: Uint256) -> (
+func slotURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*,  bitwise_ptr: BitwiseBuiltin*,range_check_ptr}(slot: Uint256) -> (
     uri_len: felt, uri: felt*
 ) {
+    let (instance) = get_contract_address();
     let (uri_len, uri) = ERC3525MetadataDescriptor.constructSlotURI{instance=instance}(slot);
     return (uri_len=uri_len, uri=uri);
 }
 
 @view
-func tokenURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+func tokenURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, bitwise_ptr: BitwiseBuiltin*, range_check_ptr}(
     tokenId: Uint256
 ) -> (uri_len: felt, uri: felt*) {
+    let (instance) = get_contract_address();
     let (uri_len, uri) = ERC3525MetadataDescriptor.constructTokenURI{instance=instance}(tokenId);
     return (uri_len=uri_len, uri=uri);
 }
